@@ -1,0 +1,22 @@
+{
+  "name": "Skeletor",
+  "version": "0.0.1",
+  "authors": [
+    "Erik Flores <erikfloresq@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "html5shiv": "~3.7.2",
+    "jquery": "1.11.1",
+    "normalize-css": "~3.0.1",
+    "parsleyjs": "~2.0.3"
+  }
+}
