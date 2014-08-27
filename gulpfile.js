@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 
 var paths = {
 	jades : ['./precom/jade/*.jade'],
-	scripts : ['./precom/coffee/*.coffee'],
+	coffee : ['./precom/coffee/*.coffee'],
 	stylus : ['./precom/stylus/*.styl']
 }
 
@@ -19,28 +19,27 @@ gulp.task('jade',function(){
 			pretty : true
 		}))
 		.pipe(gulp.dest('./'))
+		.pipe(livereload())
 });
 
 gulp.task('stylus',function(){
-	return gulp.src(paths.stylus)
-				.pipe(stylus({use:[jeet(),rupture()]}))
-				.pipe(gulp.dest('./css'))
+	gulp.src(paths.stylus)
+		.pipe(stylus({use:[jeet(),rupture()]}))
+		.pipe(gulp.dest('./css'))
+		.pipe(livereload())
 });
 
 gulp.task('coffee',function(){
 	gulp.src(paths.coffee)
 		.pipe(coffee({bare: true})).on('error',gutil.log)
 		.pipe(gulp.dest('./js'))
+		.pipe(livereload())
 });
 
-gulp.task('default',['jade','stylus']);
+gulp.task('default',['jade','stylus','coffee']);
 
 gulp.task('watch',function(){
-	livereload.listen();
-	gulp.watch(paths.jades,['jade']).on('change', livereload.changed);
-	gulp.watch(paths.stylus,['stylus']).on('change', livereload.changed);
-	//gulp.watch(paths.coffee,['coffee']);
+	gulp.watch(paths.jades,['jade']);
+	gulp.watch(paths.stylus,['stylus']);
+	gulp.watch(paths.coffee,['coffee']);
 });
-
-
-
