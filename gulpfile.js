@@ -71,9 +71,9 @@ gulp.task('serve', function () {
     notify: false,
     server: [paths.root]
   });
-  gulp.watch([paths.html]);
-  gulp.watch([paths.css]);
-  gulp.watch([paths.js], ['jshint']);
+  gulp.watch([paths.jade],['jade']);
+  gulp.watch([paths.stylus],['stylus']);
+  gulp.watch([paths.coffee], ['coffee','jshint']);
 });
 
 gulp.task('serve:dist', ['default'], function () {
