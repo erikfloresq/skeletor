@@ -1,13 +1,16 @@
 doctype
-body
+html
 	head
+		meta(charset="utf-8")
 		title Skeletor
+		meta(name="description",content="Skeletor")
+		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
 		link(rel="stylesheet",href="bower_components/normalize-css/normalize.css")
+		link(rel="stylesheet",href="bower_components/bootstrap/dist/css/bootstrap.min.css")
+		link(rel="stylesheet",href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css")
 		link(rel="stylesheet",href="css/style.css")
 		script(src="bower_components/html5shiv/dist/html5shiv.min.js")
 	body
-		.content
-			- for(i=0;i<=20;i++)
-				div.item
-		script(src="bower_components/jquery/dist/jquery.min.js")
+		.container
+		script(src="bower_components/angular/angular.min.js")
 		script(src="js/script.js")

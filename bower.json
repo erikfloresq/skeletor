@@ -18,5 +18,9 @@
     "jquery": "1.11.1",
     "normalize-css": "~3.0.1",
     "parsleyjs": "~2.0.3"
+  },
+  "devDependencies": {
+    "angular": "1.2.23",
+    "bootstrap": "~3.2.0"
   }
 }
