@@ -1,6 +1,6 @@
 {
   "name": "Skeletor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Estructura para un proyecto basado en jade, stylus y coffeeScript",
   "repository" : "https://github.com/weriklandia/skeletor.git",
   "main": "index.html",
@@ -18,8 +18,11 @@
     "gulp-load-plugins": "^0.6.0",
     "gulp-size": "^1.1.0",
     "gulp-util": "^3.0.0",
+    "gulp.spritesmith": "^2.4.0",
     "jeet": "^5.3.0",
     "jshint-stylish": "^0.4.0",
+    "nib": "^1.1.0",
+    "node-gyp": "^1.0.2",
     "run-sequence": "^0.3.6",
     "rupture": "^0.3.0"
   },

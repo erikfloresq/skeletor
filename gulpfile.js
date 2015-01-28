@@ -9,6 +9,9 @@ var gulp = require('gulp'),
 	rupture = require('rupture'),
 	gutil = require('gulp-util'),
 	browserSync = require('browser-sync'),
+	spritesmith = require('gulp.spritesmith'),
+	nib = require('nib'),
+	concat = require('gulp-concat'),
 	reload = browserSync.reload;
 
 var paths = {
@@ -20,7 +23,10 @@ var paths = {
 	rootCss : 'app/css',
 	js : 'app/js/*.js',
 	css : 'app/css/*.css',
-	html : 'app/*.html'
+	html : 'app/*.html',
+	img : 'app/img/sprite/*.png',
+	imgSpriteDest : 'app/img/',
+	cssSpriteDest : 'app/precom/stylus/'
 }
 
 gulp.task('jade',function(){
@@ -29,14 +35,12 @@ gulp.task('jade',function(){
 			pretty : true
 		}))
 		.pipe(gulp.dest(paths.root))
-		.pipe(reload({stream: true, once: true}))
 });
 
 gulp.task('stylus',function(){
 	return gulp.src(paths.stylus)
 				.pipe(stylus({use:[jeet(),rupture()]}))
 				.pipe(gulp.dest(paths.rootCss))
-				.pipe(reload({stream: true, once: true}))
 });
 
 gulp.task('coffee',function(){
@@ -51,6 +55,25 @@ gulp.task('jshint', function () {
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+});
+
+gulp.task('sprite', function () {
+  var spriteData = gulp.src(paths.img)
+  					.pipe(spritesmith({
+  						algorithm: 'binary-tree',
+					    imgName: 'sprite.png',
+					    cssName: 'sprite.styl',
+					    imgPath : '../../public/static/o/mapfre/img/sprite.png'
+				  	}));
+
+      spriteData.img.pipe(gulp.dest(paths.imgSpriteDest));
+      spriteData.css.pipe(gulp.dest(paths.cssSpriteDest));
+});
+
+gulp.task('concatjs',function(){
+	gulp.src(paths.allJs)
+		.pipe(concat('mapfre_campana.js'))
+		.pipe(gulp.dest('../../public/static/o/mapfre/js/'));
 });
 
 gulp.task('clean', del.bind(null, ['dist']));
@@ -71,9 +94,9 @@ gulp.task('serve', function () {
     notify: false,
     server: [paths.root]
   });
-  gulp.watch([paths.jade],['jade']);
-  gulp.watch([paths.stylus],['stylus']);
-  gulp.watch([paths.coffee], ['coffee','jshint']);
+  gulp.watch([paths.jade],['jade',reload]);
+  gulp.watch([paths.stylus],['stylus',reload]);
+  gulp.watch([paths.coffee], ['coffee',reload]);
 });
 
 gulp.task('serve:dist', ['default'], function () {
@@ -90,6 +113,8 @@ gulp.task('watch',function(){
 });
 
 gulp.task('compile',['jade','stylus','coffee']);
+
+gulp.task('js',['coffee','concatjs']);
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
