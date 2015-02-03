@@ -40,12 +40,18 @@ Los plugins de gulp que se estan usando son
 	- [jshint-stylish](https://www.npmjs.org/package/jshint-stylish)
 	- [run-sequence](https://www.npmjs.org/package/run-sequence)
 	- [rupture](https://www.npmjs.org/package/rupture)
+	- [nib](https://www.npmjs.org/package/nib)
+	- [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith)
+	- [gulp-concat](https://www.npmjs.org/package/gulp-concat)
+
+Recuerda que para installar los plugins tienes que hacer
+- sudo npm install (linux, mac)
 
 Si se desea se puede usar bower para la gestion de dependencias, si es asi, se debe de hacer un
-- sudo bower install
+- bower install
 
 Las dependencias que se estan instalando son
  - jQuery
  - html5shiv
  - normalize
- - parsleyjs
+ - jquery-validate
