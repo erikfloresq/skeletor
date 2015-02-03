@@ -1,3 +1,4 @@
+//paquetes
 var gulp = require('gulp'),
 	$ = require('gulp-load-plugins')(),
 	del = require('del'),
@@ -13,8 +14,8 @@ var gulp = require('gulp'),
 	nib = require('nib'),
 	concat = require('gulp-concat'),
 	reload = browserSync.reload;
-
-var paths = {
+//rutas
+var path = {
 	jade : 'app/precom/jade/*.jade',
 	coffee : 'app/precom/coffee/*.coffee',
 	stylus : 'app/precom/stylus/*.styl',
@@ -28,52 +29,75 @@ var paths = {
 	imgSpriteDest : 'app/img/',
 	cssSpriteDest : 'app/precom/stylus/'
 }
-
+//precompiladores
 gulp.task('jade',function(){
-	gulp.src(paths.jade)
+	gulp.src(path.jade)
 		.pipe(jade({
 			pretty : true
 		}))
-		.pipe(gulp.dest(paths.root))
+		.pipe(gulp.dest(path.root))
 });
 
 gulp.task('stylus',function(){
-	return gulp.src(paths.stylus)
-				.pipe(stylus({use:[jeet(),rupture()]}))
-				.pipe(gulp.dest(paths.rootCss))
+	return gulp.src(path.stylus)
+				.pipe(stylus({use:[jeet(),rupture(),nib()]}))
+				.pipe(gulp.dest(path.rootCss))
 });
 
 gulp.task('coffee',function(){
-	gulp.src(paths.coffee)
+	gulp.src(path.coffee)
 		.pipe(coffee({bare: true})).on('error',gutil.log)
-		.pipe(gulp.dest(paths.rootJs))
+		.pipe(gulp.dest(path.rootJs))
 });
 
+//sprites para css
+gulp.task('sprite', function () {
+  var spriteData = gulp.src(path.img)
+  					.pipe(spritesmith({
+  						algorithm: 'binary-tree',
+					    imgName: 'sprite.png',
+					    cssName: 'sprite.styl',
+					    imgPath : 'app/img/sprite.png'
+				  	}));
+
+      spriteData.img.pipe(gulp.dest(path.imgSpriteDest));
+      spriteData.css.pipe(gulp.dest(path.cssSpriteDest));
+});
+
+//validador de js
 gulp.task('jshint', function () {
-  return gulp.src(paths.js)
+  return gulp.src(path.js)
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-gulp.task('sprite', function () {
-  var spriteData = gulp.src(paths.img)
-  					.pipe(spritesmith({
-  						algorithm: 'binary-tree',
-					    imgName: 'sprite.png',
-					    cssName: 'sprite.styl',
-					    imgPath : '../../public/static/o/mapfre/img/sprite.png'
-				  	}));
-
-      spriteData.img.pipe(gulp.dest(paths.imgSpriteDest));
-      spriteData.css.pipe(gulp.dest(paths.cssSpriteDest));
+//concatenador de js
+gulp.task('concatjs',function(){
+	gulp.src(path.allJs)
+		.pipe(concat('script.js'))
+		.pipe(gulp.dest('app/js/'));
 });
 
-gulp.task('concatjs',function(){
-	gulp.src(paths.allJs)
-		.pipe(concat('mapfre_campana.js'))
-		.pipe(gulp.dest('../../public/static/o/mapfre/js/'));
+//iniciar servidor
+gulp.task('browserSync',function(){
+	browserSync({
+    	notify: true,
+    	server: [path.root]
+  	});
+});
+
+gulp.task('serve', function () {
+  runSequence(['browserSync','watch']);
+});
+
+//produccion - aun no se implementa bien
+gulp.task('serve:dist', ['default'], function () {
+  browserSync({
+    notify: false,
+    server: 'dist'
+  });
 });
 
 gulp.task('clean', del.bind(null, ['dist']));
@@ -89,34 +113,16 @@ gulp.task('copy', function () {
     .pipe($.size({title: 'copy'}));
 });
 
-gulp.task('serve', function () {
-  browserSync({
-    notify: false,
-    server: [paths.root]
-  });
-  gulp.watch([paths.jade],['jade',reload]);
-  gulp.watch([paths.stylus],['stylus',reload]);
-  gulp.watch([paths.coffee], ['coffee',reload]);
-});
-
-gulp.task('serve:dist', ['default'], function () {
-  browserSync({
-    notify: false,
-    server: 'dist'
-  });
-});
-
+//Utilitarios
 gulp.task('watch',function(){
-	gulp.watch(paths.jade,['jade']);
-	gulp.watch(paths.stylus,['stylus']);
-	gulp.watch(paths.coffee,['coffee']);
+	gulp.watch([path.jade],['jade',reload]);
+  	gulp.watch([path.stylus],['stylus',reload]);
+  	gulp.watch([path.coffee], ['coffee',reload]);
 });
-
-gulp.task('compile',['jade','stylus','coffee']);
 
 gulp.task('js',['coffee','concatjs']);
 
-// Build Production Files, the Default Task
-gulp.task('default', ['clean'], function (cb) {
-  runSequence(['jade','coffee','stylus','jshint', 'copy'], cb);
+// Tarea por default
+gulp.task('default', function () {
+  runSequence(['jade','coffee','stylus']);
 });

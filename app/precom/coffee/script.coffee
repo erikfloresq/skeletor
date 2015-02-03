@@ -1,13 +1,30 @@
 Skeletor = (($)->
 	st =
-		'item' : '.item'
+		'formRegister' : '#register'
 	dom = {}
+	stForm =
+		'rules' :
+			'name' :
+				'required' 	:	true
+			'email' :
+				'required' 	:	true
+				'email' 	:	true
+			'message' :
+				'required' 	:	true
+		'messages' :
+			'name' :
+				'required' 	: 	'Campo obligatorio'
+			'email' :
+				'required' 	: 	'Campo obligatorio'
+				'email'		:	'Formato Incorrecto'
+			'message' :
+				'required' : 	'Campo obligatorio'
 	catchDom = ->
-		dom.item = $(st.item)
-		console.log 'show the code please :OOO'
+		dom.formRegister = $(st.formRegister)
 		return
 	bindEvents = ->
-		dom.item.on('click',fnEvents.startAction)
+		dom.formRegister.validate(stForm)
+		return
 	fnEvents =
 		startAction = ->
 			console.log 'show the code'

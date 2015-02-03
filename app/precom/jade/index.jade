@@ -1,10 +1,10 @@
 doctype
-html
+html(lang=es)
 	head
 		meta(charset="utf-8")
 		title Skeletor
 		meta(name="description",content="Skeletor")
-		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		link(rel="stylesheet",href="bower_components/normalize-css/normalize.css")
 		link(rel="stylesheet",href="bower_components/bootstrap/dist/css/bootstrap.min.css")
 		link(rel="stylesheet",href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css")
@@ -12,5 +12,18 @@ html
 		script(src="bower_components/html5shiv/dist/html5shiv.min.js")
 	body
 		.container
-		script(src="bower_components/angular/angular.min.js")
+			h1 Skeletor
+			form#register
+				.form-group
+					label(for='name') Nombre
+					input#name.form-control(name='name', type='text', placeholder='Ingrese su nombre')
+				.form-group
+					label(for='email') Email
+					input#email.form-control(name='email', type='email', placeholder='Ingrese su email')
+				.form-group
+					label(for='message') Mensaje
+					textarea#message.form-control(name='message', placeholder='Ingrese su mensaje' rows="3")
+				input.btn.btn-default(type='submit') Enviar
+		script(src="bower_components/jquery/dist/jquery.min.js")
+		script(src="bower_components/jquery-validation/dist/jquery.validate.min.js")
 		script(src="js/script.js")
