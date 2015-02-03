@@ -22,7 +22,7 @@ Las Tareas que estamos manejando son
 - copy, pasar los archivos de la carpeta app a la carpeta dist sin la carpeta precom (tiene los archivos jade, coffee, stylus)
 - serve, crear un servidor y asu vez, reacciona a los cambios en los archivos jade, stylus y coffee, los cuales compila y luego refresca todos los navegadores que tengan la página en visualización. :D
 - watch, reacciona a los cambios en los archivos jade, stylus, coffee y los compila.
-- default, ejecuta las tareas jade, stylus, coffee, jshint, copy, clean
+- default, ejecuta las tareas jade, stylus, coffee
 
 Los plugins de gulp que se estan usando son
 	- [gulp](https://www.npmjs.org/package/gulp)
