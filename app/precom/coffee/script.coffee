@@ -26,7 +26,7 @@ Skeletor = (($)->
 		dom.formRegister.validate(stForm)
 		return
 	fnEvents =
-		startAction = ->
+		startAction : ->
 			console.log 'show the code'
 			return
 	init = ->
