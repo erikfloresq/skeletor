@@ -4,10 +4,9 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
-var coffee = require('gulp-coffee');
-var jade = require('gulp-jade');
+var babel = require('gulp-babel');
+var pug = require('gulp-pug');
 var stylus = require('gulp-stylus');
-var jeet = require('jeet');
 var rupture = require('rupture');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
@@ -18,8 +17,8 @@ var reload = browserSync.reload;
 
 // Rutas
 var path = {
-	jade : 'app/precom/jade/*.jade',
-	coffee : 'app/precom/coffee/*.coffee',
+	pug : 'app/precom/pug/*.pug',
+	es2015 : 'app/precom/js/*.js',
 	stylus : 'app/precom/stylus/*.styl',
 	root : 'app/',
 	rootJs : 'app/js',
@@ -32,21 +31,23 @@ var path = {
 	cssSpriteDest : 'app/precom/stylus/'
 };
 //precompiladores
-gulp.task('jade',function(){
-	gulp.src(path.jade)
-		.pipe(jade({ pretty : true }))
+gulp.task('pug',function(){
+	gulp.src(path.pug)
+		.pipe(pug({ pretty : true }))
 		.pipe(gulp.dest(path.root));
 });
 
 gulp.task('stylus',function(){
 	return gulp.src(path.stylus)
-				.pipe(stylus({use:[jeet(),rupture(),nib()]}))
+				.pipe(stylus({use:[rupture(),nib()]}))
 				.pipe(gulp.dest(path.rootCss));
 });
 
-gulp.task('coffee',function(){
-	return gulp.src(path.coffee)
-				.pipe(coffee({bare: true})).on('error',gutil.log)
+gulp.task('babel',function(){
+	return gulp.src(path.es2015)
+				.pipe(babel({
+            presets: ['es2015']
+        }))
 				.pipe(gulp.dest(path.rootJs));
 });
 
@@ -62,15 +63,6 @@ gulp.task('sprite', function () {
 
 	  spriteData.img.pipe(gulp.dest(path.imgSpriteDest));
 	  spriteData.css.pipe(gulp.dest(path.cssSpriteDest));
-});
-
-//validador de js
-gulp.task('jshint', function () {
-  return gulp.src(path.js)
-			.pipe(reload({stream: true, once: true}))
-			.pipe($.jshint())
-			.pipe($.jshint.reporter('jshint-stylish'))
-			.pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
 //concatenador de js
@@ -120,14 +112,14 @@ gulp.task('copy', function () {
 
 // Utilitarios
 gulp.task('watch',function(){
-	gulp.watch([path.jade],['jade',reload]);
+	gulp.watch([path.pug],['pug',reload]);
 	gulp.watch([path.stylus],['stylus',reload]);
-	gulp.watch([path.coffee], ['coffee',reload]);
+	gulp.watch([path.es2015], ['babel',reload]);
 });
 
-gulp.task('js',['coffee','concatjs']);
+gulp.task('js',['babel','concatjs']);
 
 // Tarea por default
 gulp.task('default', function () {
-  runSequence(['jade','coffee','stylus']);
+  runSequence(['pug','babel','stylus']);
 });

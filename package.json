@@ -1,12 +1,12 @@
 {
   "name": "Skeletor",
-  "version": "0.0.2",
-  "description": "Estructura para un proyecto basado en jade, stylus y coffeeScript",
-  "repository": "https://github.com/weriklandia/skeletor.git",
+  "version": "1.1.0",
+  "description": "Estructura para un proyecto basado en jade, stylus y es2015",
+  "repository": "https://github.com/erikfloresq/skeletor.git",
   "main": "index.html",
   "dependencies": {
     "gulp": "^3.9.1",
-    "gulp-coffee": "^2.3.4",
+    "gulp-babel": "^6.1.2",
     "gulp-pug": "^3.3.0",
     "gulp-stylus": "^2.6.0"
   },
@@ -15,19 +15,21 @@
     "del": "^2.2.2",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
-    "gulp-jshint": "^2.0.4",
     "gulp-load-plugins": "^1.5.0",
     "gulp-size": "^2.1.0",
     "gulp-util": "^3.0.8",
     "gulp.spritesmith": "^6.4.0",
-    "jeet": "^7.1.0",
-    "jshint-stylish": "^2.2.1",
     "nib": "^1.1.2",
     "node-gyp": "^3.6.0",
     "run-sequence": "^1.2.2",
-    "rupture": "^0.6.2"
+    "rupture": "^0.6.2",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "babel-preset-es2015": "^6.24.1"
   },
   "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "erik flores",
