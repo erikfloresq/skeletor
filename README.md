@@ -14,6 +14,18 @@ Para instalar las dependencias que necesitamos debemos hacer en nuestro terminal
 yarn install
 ```
 
+Luego para generar la estructura inicial se ingresa:
+
+```
+gulp
+```
+
+Para crear un servidor y ver nuestros cambios reflejados al instante se recomienda usar:
+
+```
+gulp serve
+```
+
 Las Tareas que estamos manejando en el __gulpfile__:
 
 - __jade__: para compilar los archivos jade.
