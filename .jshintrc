@@ -1,7 +1,0 @@
-{
-	"node" : true,
-	"globals" : {
-		"$" : false,
-		"jQuery" : false
-	}
-}
