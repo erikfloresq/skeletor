@@ -1,31 +1,34 @@
-skeletor
+💀 skeletor 💀
 ========
 
-## ¿Que es?
+## ¿Que és?
 
 Es una estructura base para comenzar un proyecto basado en jade, stylus, es2015.
 Se usa gulp para la gestión de tareas.
 
-## ¿Como se usa?
+## ¿Cómo se usa?
 
-Entrar a la raiz del proyecto y hacer
-- sudo npm install
-Para poder instalar todas las dependencias que usara gulp
+Para instalar las dependencias que necesitamos debemos hacer en nuestro terminal de confianza:
 
-Las Tareas que estamos manejando son
+```
+yarn install
+```
 
-- jade, para compilar los archivos jade
-- stylus, para compilar los archivos stylus
-- babel, para compilar los js desarrollados en es2015
-- clean, para eliminar la carpeta dist
-- copy, pasar los archivos de la carpeta app a la carpeta dist sin la carpeta precom (tiene los archivos jade, js, stylus)
-- serve, crear un servidor y asu vez, reacciona a los cambios en los archivos jade, stylus y babel, los cuales compila y luego refresca todos los navegadores que tengan la página en visualización. :D
-- watch, reacciona a los cambios en los archivos jade, stylus, babel y los compila.
-- default, ejecuta las tareas jade, stylus, babel
+Las Tareas que estamos manejando en el __gulpfile__:
 
-Los plugins de gulp que se estan usando son
+- __jade__: para compilar los archivos jade
+- __stylus__: para compilar los archivos stylus
+- __babel__: para compilar los js desarrollados en es2015
+- __clean__: para eliminar la carpeta dist
+- __copy__: pasar los archivos de la carpeta app a la carpeta dist sin la carpeta precom (tiene los archivos jade, js, stylus)
+- __serve__: crear un servidor y asu vez, reacciona a los cambios en los archivos jade, stylus y babel, los cuales compila y luego refresca todos los navegadores que tengan la página en visualización. :D
+- __watch__: reacciona a los cambios en los archivos jade, stylus, babel y los compila.
+- __default__: ejecuta las tareas jade, stylus, babel
+
+Los paquetes que estamos usando para nuestro trabajo con gulp son:
+
 	- [gulp](https://www.npmjs.org/package/gulp)
-	- [gulp-coffee](https://www.npmjs.org/package/gulp-coffee)
+	- [gulp-babel](https://www.npmjs.org/package/gulp-babel)
 	- [gulp-pug](https://www.npmjs.org/package/gulp-pug)
 	- [gulp-stylus](https://www.npmjs.org/package/gulp-stylus)
 	- [browser-sync](https://www.npmjs.org/package/browser-sync)
@@ -40,13 +43,7 @@ Los plugins de gulp que se estan usando son
 	- [gulp.spritesmith](https://www.npmjs.org/package/gulp.spritesmith)
 	- [gulp-concat](https://www.npmjs.org/package/gulp-concat)
 
-Recuerda que para installar los plugins tienes que hacer
-
-```
-yarn install
-```
-
-En el caso que quieras validar tu js puede usar
+En el caso que quieras validar tu js puedes usar:
 
 ```
 yarn lint
