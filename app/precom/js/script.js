@@ -1,3 +1,1 @@
-'use strict';
-
-console.log("hola es2015!");
+console.log('sdfsdf');
