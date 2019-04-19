@@ -11,7 +11,7 @@ Se usa gulp para la gestión de tareas.
 Para instalar las dependencias que necesitamos debemos hacer en nuestro terminal de confianza:
 
 ```
-yarn install
+npm install
 ```
 
 Luego para generar la estructura inicial se ingresa:
@@ -40,5 +40,5 @@ Las Tareas que estamos manejando en el __gulpfile__:
 En el caso que quieras validar tu js puedes usar:
 
 ```
-yarn lint
+npm lint
 ```
