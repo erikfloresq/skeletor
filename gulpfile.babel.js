@@ -7,7 +7,6 @@ import pug from 'gulp-pug';
 import stylus from 'gulp-stylus';
 import rupture from 'rupture';
 import browserSync from 'browser-sync';
-import spritesmith from 'gulp.spritesmith';
 import nib from 'nib';
 import concat from 'gulp-concat';
 
@@ -25,9 +24,6 @@ const path = {
   js: 'app/js/*.js',
   css: 'app/css/*.css',
   html: 'app/*.html',
-  img: 'app/img/sprite/*.png',
-  imgSpriteDest: 'app/img/',
-  cssSpriteDest: 'app/precom/stylus/',
 };
 
 // preprocesadores
@@ -47,24 +43,6 @@ gulp.task('babel', () => {
   gulp.src(path.es2015)
   .pipe(babel({ presets: ['es2015'] }))
   .pipe(gulp.dest(path.rootJs));
-});
-
-
-gulp.task('sprite', () => {
-  const smith =
-    spritesmith({
-      algorithm: 'binary-tree',
-      imgName: 'sprite.png',
-      cssName: 'sprite.styl',
-      imgPath: 'app/img/sprite.png',
-    });
-
-  const spriteData =
-    gulp.src(path.img)
-      .pipe(smith);
-
-  spriteData.img.pipe(gulp.dest(path.imgSpriteDest));
-  spriteData.css.pipe(gulp.dest(path.cssSpriteDest));
 });
 
 // concatenador de js
