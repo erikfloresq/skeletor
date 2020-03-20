@@ -5,7 +5,7 @@
   "repository": "https://github.com/erikfloresq/skeletor.git",
   "main": "index.html",
   "dependencies": {
-    "acorn": "^6.3.0",
+    "acorn": "^6.4.1",
     "gulp-pug": "4.0.1",
     "gulp-stylus": "2.7.0"
   },
